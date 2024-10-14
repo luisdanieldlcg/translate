@@ -1,0 +1,36 @@
+services:
+  # Next.js client
+  client:
+    build: ./translate-client
+    ports:
+      - 3000:3000
+    container_name: translate-client
+    volumes:
+      - ./translate-client/src:/app/src
+  # Database
+  pg:
+    image: postgres:17
+    ports:
+      - 5432:5432
+    container_name: translate-database
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dba_password
+      POSTGRES_DB: translate
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 5
+      start_period: 10s
+
+  # Node.js server
+  server:
+    build: ./translate-server
+    ports:
+      - 8000:8000
+    container_name: translate-server
+    depends_on:
+      pg:
+        condition: service_healthy
+    volumes:
+      - ./translate-server/src:/app/src
