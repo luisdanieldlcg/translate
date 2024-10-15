@@ -14,7 +14,7 @@ const Home = () => {
           Any Language with Ease.
         </h1>
 
-        <button className="primary-button !text-2xl my-16 !py-3">
+        <button className="primary-button !text-xl my-16 !py-3">
           Start Chatting
         </button>
 
@@ -24,7 +24,7 @@ const Home = () => {
             paragraph="Get instant translations as you chat, ensuring seamless communication 
             in any language. No more delays or misunderstandings—just smooth 
             conversations."
-            icon={<AiOutlineThunderbolt size={50} />}
+            icon={<AiOutlineThunderbolt size={60} />}
           />
 
           <BrandingCard
@@ -32,7 +32,7 @@ const Home = () => {
             paragraph="Personalize your chat languages by setting your source and target
               languages. Save your settings for a consistent experience across
               sessions"
-            icon={<TfiWorld size={64} />}
+            icon={<TfiWorld size={60} />}
           />
 
           <BrandingCard
@@ -40,7 +40,7 @@ const Home = () => {
             paragraph="Your data is protected with end-to-end encryption, ensuring that
               your conversations remain private and secure. We prioritize your
               privacy above all else."
-            icon={<CiLock size={64} />}
+            icon={<CiLock size={60} />}
           />
         </div>
       </div>
