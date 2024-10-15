@@ -1,3 +1,4 @@
+import ErrorMessage from "@/components/ErrorMessage";
 import Link from "next/link";
 import React from "react";
 
@@ -22,7 +23,7 @@ const LoginPage = () => {
       <div className="text-center">
         Not a member yet? {""}
         <Link className="font-bold" href="/signup">
-          Click to login
+          Click to signup
         </Link>
       </div>
     </div>
