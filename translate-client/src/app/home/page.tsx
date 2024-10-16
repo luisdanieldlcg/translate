@@ -5,9 +5,7 @@ import React from "react";
 import { FiSidebar, FiUser } from "react-icons/fi";
 import { useHomeStore } from "@/store/home";
 const Home = () => {
-  const home = useHomeStore((state) => state.sidebarOpened);
   const toggleSidebar = useHomeStore((state) => state.toggleSidebar);
-
   return (
     <div className="max-w-screen-2xl mx-auto text-center flex flex-col h-screen">
       <nav className="flex items-center justify-between my-4">

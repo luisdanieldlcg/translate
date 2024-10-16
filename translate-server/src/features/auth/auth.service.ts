@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { LoginDto, RegisterDto } from './auth.dto';
-import { UserService } from '../user/user.service';
-import { User as User } from '../user/entities/user.entity';
+import { UserService } from '../users/user.service';
+import { User as User } from '../users/entities/user.entity';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()

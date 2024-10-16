@@ -15,6 +15,13 @@ export interface User {
   created_at: string;
 }
 
+interface Message {
+  message_id: string;
+  sent_by_user: boolean;
+  text: string;
+  created_at: string;
+}
+
 export const signUp = async (
   email: string,
   password: string,

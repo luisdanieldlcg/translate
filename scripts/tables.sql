@@ -23,7 +23,7 @@ create table messages (
 	message_id bigserial primary key,
 	chat_id bigint references chats(chat_id),
 	content text not null check(content <> ''),
-	send_by_user bool not null,
+	sent_by_user bool not null,
 	created_at date default CURRENT_DATE
 );
 
@@ -36,10 +36,10 @@ values('luisdanieldlcg@gmail.com', '$x9281kdla', 2);
 insert into chats(owner_id, title)
 values(1, 'New chat room for translating my homework');
 
-insert into messages(chat_id, content, send_by_user)
+insert into messages(chat_id, content, sent_by_user)
 values(1, 'Where are you?', true);
 
-insert into messages(chat_id, content, send_by_user)
+insert into messages(chat_id, content, sent_by_user)
 values(1, 'Dónde estás?', false);
 
 -- select * from languages;

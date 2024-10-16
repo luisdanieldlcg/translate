@@ -21,7 +21,6 @@ export const DatabaseModule = TypeOrmModule.forRootAsync({
       database: config.DB_NAME,
       // synchronize: true,
       // entities: [__dirname + '/../**/*.entity.{js,ts}'],
-
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       options: { trustServerCertificate: true },
       // autoLoadEntities: true,
