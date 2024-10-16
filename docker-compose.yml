@@ -22,12 +22,14 @@ services:
       interval: 5s
       retries: 5
       start_period: 10s
+    volumes:
+      - ./scripts:/docker-entrypoint-initdb.d
 
   # Node.js server
   server:
     build: ./translate-server
     ports:
-      - 8000:8000
+      - 8080:8080
     container_name: translate-server
     depends_on:
       pg:

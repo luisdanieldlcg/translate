@@ -1,6 +1,6 @@
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
-import { dbConfig } from './db.config';
+import { dbConfig } from '../db.config';
 
 export default ConfigModule.forRoot({
   isGlobal: true,

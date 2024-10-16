@@ -14,7 +14,7 @@ export class LoginDto {
 
 export class RegisterDto extends LoginDto {
   @IsNotEmpty({
-    message: 'El campo nombre no puede estar vacío.',
+    message: 'La confirmación de la contraseña no puede estar vacía.',
   })
-  readonly name: string;
+  readonly password_confirm: string;
 }
