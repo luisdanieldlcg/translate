@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
-const page = () => {
+const ChatsPage = () => {
   return redirect("/home");
 };
 
-export default page;
+export default ChatsPage;

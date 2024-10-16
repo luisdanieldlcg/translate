@@ -19,7 +19,7 @@ const Sidebar = () => {
 
   const chats = chatsData.map((chat, idx) => {
     return (
-      <div>
+      <div key={idx}>
         <h1 className="font-bold"> {chat.label} </h1>
         <ul>
           {chat.titles.map((title, idx) => (
@@ -27,7 +27,7 @@ const Sidebar = () => {
               key={idx}
               className="flex items-center gap-3 cursor-pointer hover:bg-[#333] p-2 rounded-lg truncate"
             >
-              <p>{title.charAt(0).toUpperCase() + title.slice(1)}</p>
+              <p key={idx}>{title.charAt(0).toUpperCase() + title.slice(1)}</p>
             </div>
           ))}
         </ul>
