@@ -1,14 +1,32 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+  Logger,
+} from '@nestjs/common';
 import { LoginDto, RegisterDto } from './auth.dto';
 import { UserService } from '../users/user.service';
 import { User as User } from '../users/entities/user.entity';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
+import jwtConfig from 'src/config/jwt.config';
+import { ConfigType } from '@nestjs/config';
+import { JwtPayload } from './auth.interfaces';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly jwtService: JwtService,
+    @Inject(jwtConfig.KEY)
+    private readonly config: ConfigType<typeof jwtConfig>,
+  ) {}
+
+  private readonly logger: Logger = new Logger(AuthService.name);
 
   async authenticate(dto: LoginDto) {
+    this.logger.log(`Authenticating user ${dto.email}`);
     const user = await this.userService.findByEmail(dto.email);
     if (!user) {
       throw new HttpException(
@@ -40,9 +58,17 @@ export class AuthService {
    * Logs in the given user by emitting new access token.
    * @param user User
    */
-
   private async logIn(user: User) {
-    // TODO: Implement JWT
-    return user;
+    const payload: JwtPayload = {
+      userId: user.user_id,
+    };
+    // Sign token
+    const token = await this.jwtService.signAsync(payload, {
+      privateKey: this.config.JWT_PRIVATE_KEY,
+    });
+    return {
+      ...user,
+      token,
+    };
   }
 }

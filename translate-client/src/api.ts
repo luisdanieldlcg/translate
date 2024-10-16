@@ -22,6 +22,28 @@ interface Message {
   created_at: string;
 }
 
+export const createChat = async (
+  initialMessage: string,
+  onSuccess: (user: User) => void,
+  onFail: (error: string) => void
+) => {
+  try {
+    const response = await api.post("/chats", {
+      initialMessage,
+    });
+
+    if (response.data.message) {
+      onFail(response.data.message);
+    } else if (response.status === HttpStatusCode.Created) {
+      let user: User = response.data.data;
+      onSuccess(user);
+    }
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const signUp = async (
   email: string,
   password: string,

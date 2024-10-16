@@ -15,6 +15,7 @@ export class UserService {
 
   async create(email: string, password: string) {
     try {
+      this.logger.log(`Creating user with email: ${email}`);
       const hash = await bcrypt.hash(password, 11);
       const user = this.userRepository.create({
         email,
@@ -29,20 +30,12 @@ export class UserService {
     }
   }
 
+  findOne(id: number) {
+    return this.userRepository.findOne({ where: { user_id: id } });
+  }
+
   findByEmail(email: string) {
     return this.userRepository.findOne({ where: { email: email } });
-  }
-
-  findAll() {
-    return `This action returns all user`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
   }
 
   exists(email: string): Promise<boolean> {
