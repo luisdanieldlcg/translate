@@ -9,6 +9,9 @@ const config: Config = {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    colors: {
+      purple: "#3f3cbb",
+    },
     extend: {
       colors: {
         background: "var(--background)",
