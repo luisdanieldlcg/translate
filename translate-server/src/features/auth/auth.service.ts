@@ -32,10 +32,6 @@ export class AuthService {
     if (exists) {
       throw new HttpException('User already exists', HttpStatus.CONFLICT);
     }
-
-    if (dto.password !== dto.password_confirm) {
-      throw new HttpException('Passwords do not match', HttpStatus.BAD_REQUEST);
-    }
     const user = await this.userService.create(dto.email, dto.password);
     return this.logIn(user);
   }

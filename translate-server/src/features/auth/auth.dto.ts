@@ -12,9 +12,4 @@ export class LoginDto {
   readonly password: string;
 }
 
-export class RegisterDto extends LoginDto {
-  @IsNotEmpty({
-    message: 'La confirmación de la contraseña no puede estar vacía.',
-  })
-  readonly password_confirm: string;
-}
+export class RegisterDto extends LoginDto {}
