@@ -1,3 +1,4 @@
+import ChatInput from "@/components/home/ChatInput";
 import React from "react";
 import { FiSidebar, FiUser } from "react-icons/fi";
 
@@ -10,13 +11,7 @@ const Home = () => {
       </nav>
       <div className="m-auto flex flex-col gap-12">
         <h1 className="font-bold text-4xl">What do you want to translate? </h1>
-        <textarea
-          className="outlined-input"
-          // hint
-          placeholder="Translate anything..."
-          cols={40}
-          rows={7}
-        ></textarea>
+        <ChatInput />
       </div>
     </div>
   );
