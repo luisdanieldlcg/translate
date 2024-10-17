@@ -20,7 +20,6 @@ const AuthCheck = (props: AuthCheckProps) => {
         (user) => {
           setUser(user);
           setLoading(false);
-          router.push("/home");
         },
         (_) => {
           setLoading(false);

@@ -11,7 +11,7 @@ import { ChatMessagesService } from '../chat-messages/chat-messages.service';
 export class ChatsService {
   constructor(
     @InjectRepository(Chat)
-    private userRepository: Repository<Chat>,
+    private chatRepository: Repository<Chat>,
     private userService: UserService,
     private messagesService: ChatMessagesService,
   ) {}
@@ -21,12 +21,12 @@ export class ChatsService {
     if (!exists) {
       throw new HttpException('The user of this chat does not exists', 404);
     }
-    const chat = this.userRepository.create({
+    const chat = this.chatRepository.create({
       title: createChatDto.initialMessage.substring(0, 50),
       owner_id: createChatDto.owner_id,
     });
 
-    const savedChat = await this.userRepository.save(chat);
+    const savedChat = await this.chatRepository.save(chat);
     // save first message
     await this.messagesService.create({
       chat_id: chat.chat_id,
@@ -36,12 +36,20 @@ export class ChatsService {
     return savedChat;
   }
 
-  findAll() {
-    return `This action returns all chats`;
+  async findOne(id: number) {
+    const messages = await this.messagesService.findMessages(id);
+    const chat = await this.chatRepository.findOne({
+      where: { chat_id: id },
+    });
+
+    return {
+      ...chat,
+      messages,
+    };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} chat`;
+  findAll() {
+    return `This action returns all chats`;
   }
 
   update(id: number, updateChatDto: UpdateChatDto) {

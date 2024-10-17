@@ -16,19 +16,37 @@ export interface User {
   created_at: string;
 }
 
-interface Message {
+export interface Message {
   message_id: string;
+  content: string;
   sent_by_user: boolean;
-  text: string;
   created_at: string;
 }
 
-interface Chat {
+export interface Chat {
   chat_id: number;
   title: string;
-  // messages: Message[];
-  // created_at: string;
+  messages: Message[];
 }
+
+export const getChat = async (
+  chatId: number,
+  onSuccess: (chat: Chat) => void,
+  onFail: (error: string) => void
+) => {
+  try {
+    const response = await api.get(`/chats/${chatId}`);
+    if (response.data.message) {
+      onFail(response.data.message);
+    } else if (response.status === HttpStatusCode.Ok) {
+      console.log("Response:", response.data);
+      let chat: Chat = response.data;
+      onSuccess(chat);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const createChat = async (
   initialMessage: string,

@@ -23,4 +23,11 @@ export class ChatMessagesService {
     });
     return this.messageRepository.save(chat);
   }
+
+  findMessages(chatId: number) {
+    // return all the messages belonging to a chat
+    return this.messageRepository.find({
+      where: { chat_id: chatId },
+    });
+  }
 }
