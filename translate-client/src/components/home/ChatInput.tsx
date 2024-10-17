@@ -51,7 +51,6 @@ const ChatInput = () => {
       user.userId,
       (chat) => {
         setError("");
-        console.log("New chat created:", chat.chat_id);
         router.push(`/home/chats/${chat.chat_id}`);
       },
       (_) => {

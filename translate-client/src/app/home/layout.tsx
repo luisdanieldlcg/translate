@@ -32,7 +32,7 @@ export default function RootLayout({
             <div className="max-w-screen-2xl mx-auto text-center flex flex-col h-screen">
               <div className="m-auto flex flex-col gap-12">
                 {children}
-                <ErrorMessage message={error} />
+                {error && <ErrorMessage message={error} />}
                 {creatingChat ? (
                   <Loading size={64} className="mx-auto" />
                 ) : (

@@ -5,6 +5,7 @@ import { Chat } from './entities/chat.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserService } from '../users/user.service';
+import { ChatMessagesService } from '../chat-messages/chat-messages.service';
 
 @Injectable()
 export class ChatsService {
@@ -12,6 +13,7 @@ export class ChatsService {
     @InjectRepository(Chat)
     private userRepository: Repository<Chat>,
     private userService: UserService,
+    private messagesService: ChatMessagesService,
   ) {}
 
   async create(createChatDto: CreateChatDto) {
@@ -23,7 +25,15 @@ export class ChatsService {
       title: createChatDto.initialMessage.substring(0, 50),
       owner_id: createChatDto.owner_id,
     });
-    return this.userRepository.save(chat);
+
+    const savedChat = await this.userRepository.save(chat);
+    // save first message
+    await this.messagesService.create({
+      chat_id: chat.chat_id,
+      content: createChatDto.initialMessage,
+      sent_by_user: true,
+    });
+    return savedChat;
   }
 
   findAll() {
