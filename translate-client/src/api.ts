@@ -1,4 +1,5 @@
 import axios, { HttpStatusCode } from "axios";
+axios.defaults.withCredentials = true;
 
 export const TRANSLATE_SERVER_URL = "http://localhost:8080";
 
@@ -35,6 +36,25 @@ export const createChat = async (
     if (response.data.message) {
       onFail(response.data.message);
     } else if (response.status === HttpStatusCode.Created) {
+      let user: User = response.data.data;
+      onSuccess(user);
+    }
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const verifyToken = async (
+  onSuccess: (user: User) => void,
+  onFail: (error: string) => void
+) => {
+  try {
+    const response = await api.post("/auth/verify-token", {});
+    if (response.data.message) {
+      onFail(response.data.message);
+    } else if (response.status === HttpStatusCode.Ok) {
+      console.log(response.data);
       let user: User = response.data.data;
       onSuccess(user);
     }

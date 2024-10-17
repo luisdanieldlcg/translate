@@ -6,6 +6,7 @@ import {
   Inject,
   Post,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './auth.dto';
@@ -13,6 +14,9 @@ import * as constants from '../../common/constants';
 import jwtConfig from 'src/config/jwt.config';
 import { ConfigType } from '@nestjs/config';
 import { Response } from 'express';
+import { AccessGuard, GetUserPrincipal } from './auth.decorators';
+import { UserPrincipal } from './auth.interfaces';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
@@ -49,5 +53,14 @@ export class AuthController {
       maxAge: 60 * this.config.JWT_LIFETIME,
     });
     return credentials;
+  }
+
+  @Post('verify-token')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(AccessGuard)
+  async verifyToken(@GetUserPrincipal() user: UserPrincipal) {
+    // If we reach this point, the token is valid and the user exists
+    // We can return the user data
+    return user;
   }
 }

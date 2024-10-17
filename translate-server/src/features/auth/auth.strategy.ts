@@ -11,13 +11,18 @@ import * as constants from '../../common/constants';
 
 const cookieExtractor = (req: Request) => {
   const cookies = req.cookies;
+  console.log('Attempting to extract cookie');
   if (!req || !cookies) {
     return undefined;
   }
+
   const accessToken = req.cookies[constants.accessTokenName];
+
+  console.log('Extracted cookie', accessToken);
   if (!accessToken) {
     return undefined;
   }
+  
   return accessToken;
 };
 @Injectable()
