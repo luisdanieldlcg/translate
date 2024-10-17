@@ -29,7 +29,7 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ) {
     const credentials = await this.authService.authenticate(dto);
-    res.cookie(constants.accessTokenName, {
+    res.cookie(constants.accessTokenName, credentials.token, {
       httpOnly: true,
       secure: false,
       maxAge: 60 * this.config.JWT_LIFETIME,
@@ -43,7 +43,7 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ) {
     const credentials = await this.authService.signup(dto);
-    res.cookie(constants.accessTokenName, {
+    res.cookie(constants.accessTokenName, credentials.token, {
       httpOnly: true,
       secure: false,
       maxAge: 60 * this.config.JWT_LIFETIME,
