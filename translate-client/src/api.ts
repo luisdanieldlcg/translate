@@ -11,7 +11,7 @@ const api = axios.create({
 });
 
 export interface User {
-  user_id: string;
+  userId: number;
   email: string;
   created_at: string;
 }
@@ -23,21 +23,29 @@ interface Message {
   created_at: string;
 }
 
+interface Chat {
+  chat_id: number;
+  title: string;
+  // messages: Message[];
+  // created_at: string;
+}
+
 export const createChat = async (
   initialMessage: string,
-  onSuccess: (user: User) => void,
+  owner: number,
+  onSuccess: (chat: Chat) => void,
   onFail: (error: string) => void
 ) => {
   try {
     const response = await api.post("/chats", {
       initialMessage,
+      owner_id: owner,
     });
-
     if (response.data.message) {
       onFail(response.data.message);
     } else if (response.status === HttpStatusCode.Created) {
-      let user: User = response.data.data;
-      onSuccess(user);
+      let chat: Chat = response.data;
+      onSuccess(chat);
     }
     console.log(response.data);
   } catch (error) {

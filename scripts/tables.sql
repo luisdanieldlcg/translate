@@ -14,14 +14,14 @@ create table users(
 
 create table chats(
 	chat_id bigserial primary key,
-	owner_id bigint references users(user_id),
+	owner_id bigint not null references users(user_id),
 	title varchar(50) not null CHECK(title <> ''),
 	created_at date not null default CURRENT_DATE
 );
 
 create table messages (
 	message_id bigserial primary key,
-	chat_id bigint references chats(chat_id),
+	chat_id bigint not null references chats(chat_id),
 	content text not null check(content <> ''),
 	sent_by_user bool not null,
 	created_at date default CURRENT_DATE
@@ -31,7 +31,7 @@ insert into languages(language_name)
 values('Spanish'),('English');
 
 insert into users(email, password_hash, preferred_language)
-values('luisdanieldlcg@gmail.com', '$x9281kdla', 2);
+values('admin@email.com', '111111', 2);
 
 insert into chats(owner_id, title)
 values(1, 'New chat room for translating my homework');

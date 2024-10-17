@@ -41,4 +41,8 @@ export class UserService {
   exists(email: string): Promise<boolean> {
     return this.userRepository.exists({ where: { email: email } });
   }
+
+  existsById(id: number): Promise<boolean> {
+    return this.userRepository.exists({ where: { user_id: id } });
+  }
 }

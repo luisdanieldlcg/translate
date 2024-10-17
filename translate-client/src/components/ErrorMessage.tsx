@@ -17,7 +17,7 @@ const ErrorMessage = (props: Props) => {
 
   return (
     <div
-      className={`flex justify-center bg-border text-red-300 px-4 py-2 rounded-lg 
+      className={`flex justify-center text-red-300 px-4 py-2 rounded-lg bg-[#2e1b1b] 
         ${visible ? "" : "hidden"}
       `}
     >

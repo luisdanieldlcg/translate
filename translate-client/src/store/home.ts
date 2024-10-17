@@ -5,15 +5,21 @@ type HomeStore = {
   toggleSidebar: () => void;
   creatingChat: boolean;
   toggleCreatingChat: () => void;
+  error: string;
+  setError: (error: string) => void;
 };
 
 export const useHomeStore = create<HomeStore>((set) => ({
   sidebarOpened: false,
   creatingChat: false,
+  error: "",
   toggleSidebar: () => {
     set((state) => ({ sidebarOpened: !state.sidebarOpened }));
   },
   toggleCreatingChat: () => {
     set((state) => ({ creatingChat: !state.creatingChat }));
+  },
+  setError: (error) => {
+    set(() => ({ error }));
   },
 }));

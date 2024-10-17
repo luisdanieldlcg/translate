@@ -1,6 +1,9 @@
 "use client";
+import { createChat } from "@/api";
 import { useHomeStore } from "@/store/home";
+import { useUserStore } from "@/store/user";
 import { Textarea } from "@nextui-org/input";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { BsSend } from "react-icons/bs";
 
@@ -19,14 +22,42 @@ const ChatInput = () => {
     }
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     if (text.trim() !== "") {
       console.log(text);
       setText(""); // Clear input after submission
       toggleCreatingChat();
+      await handleCreateChat();
+      toggleCreatingChat();
     }
+  };
+
+  const user = useUserStore((state) => state.user);
+  const setError = useHomeStore((state) => state.setError);
+  const router = useRouter();
+
+  const handleCreateChat = async () => {
+    setError("");
+
+    if (!user || !user.userId) {
+      console.log("create:", user);
+      setError("Re-authenticate, please.");
+      return;
+    }
+    await createChat(
+      text,
+      user.userId,
+      (chat) => {
+        setError("");
+        console.log("New chat created:", chat.chat_id);
+        router.push(`/home/chats/${chat.chat_id}`);
+      },
+      (_) => {
+        setError("Could not create chat. Please try again.");
+      }
+    );
   };
 
   return (
