@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+"use client";
 import localFont from "next/font/local";
 import "./globals.css";
 // 1. import `NextUIProvider` component
@@ -18,10 +18,6 @@ const poppins = localFont({
     },
   ],
 });
-export const metadata: Metadata = {
-  title: "Translate",
-  description: "A Chatbot that for translating text",
-};
 
 export default function RootLayout({
   children,

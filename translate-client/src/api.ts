@@ -54,11 +54,9 @@ export const verifyToken = async (
     if (response.data.message) {
       onFail(response.data.message);
     } else if (response.status === HttpStatusCode.Ok) {
-      console.log(response.data);
-      let user: User = response.data.data;
+      let user: User = response.data;
       onSuccess(user);
     }
-    console.log(response.data);
   } catch (error) {
     console.log(error);
   }
