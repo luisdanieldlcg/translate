@@ -1,10 +1,13 @@
+"use client";
 import BrandingCard from "@/components/BrandingCard";
 import Navbar from "@/components/Navbar";
 import { AiOutlineThunderbolt } from "react-icons/ai";
 import { TfiWorld } from "react-icons/tfi";
 import { CiLock } from "react-icons/ci";
+import { useRouter } from "next/navigation";
 
 const Home = () => {
+  const router = useRouter();
   return (
     <>
       <Navbar />
@@ -14,7 +17,10 @@ const Home = () => {
           Any Language with Ease.
         </h1>
 
-        <button className="primary-button !text-xl my-16 !py-3">
+        <button
+          className="primary-button !text-xl my-16 !py-3"
+          onClick={() => router.push("/signup")}
+        >
           Start Chatting
         </button>
 

@@ -57,36 +57,32 @@ This is how your `.env` file should look like:
 
 ```bash
 # API server settings
-
-API_SERVER_PORT=8080
-
+API_SERVER_PORT=3000
 # Database connection settings
-
 DB_HOST=pg
 DB_PORT=5432
-DB_SA_PASSWORD=dba_password
+DB_SA_PASSWORD=
 DB_SA_USERNAME=postgres
-DB_NAME=translate
-
+DB_NAME=mydb
 # Datatabase query logs
-
 DB_LOGS=true
-
 # Translation API keys
-
+RAPID_API_HOST=google-api31.p.rapidapi.com
 RAPID_API_KEY=your-api-key
-
 # JWT Configuration
-
 # Private key
-
-JWT_PRIVATE_KEY=translate-api-login-private-key
-
+JWT_PRIVATE_KEY=key
 # Token lifetime
-
 # Specify in minutes
-
 JWT_LIFETIME=3600
 ```
 
-Most of the variables are self-explanatory.
+Most of the variables should be self-explanatory.
+You need to set the `RAPID_API_KEY` to your RapidAPI key. You can get a key by signing up [here](https://rapidapi.com/).
+
+After signing up, search for the Google API and subscribe to it: [Google API](https://rapidapi.com/rphrp1985/api/google-api31).
+
+Now search for the translate endpoint on the left panel, select NodeJS with Axios client.
+Your API key will be displayed on the right side of the screen within the a header parameter: `'x-rapidapi-key': 'your-api-key'`.
+
+Now set your `RAPID_API_KEY` to the key you just got.

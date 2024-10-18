@@ -37,9 +37,8 @@ export class TranslationService {
           },
           {
             headers: {
-              'x-rapidapi-key':
-                'f3adeed93fmsha7feeffe69ccbbap13db1cjsn6d9bb9a8241b',
-              'x-rapidapi-host': 'google-api31.p.rapidapi.com',
+              'x-rapidapi-key': this.config.RAPID_API_KEY,
+              'x-rapidapi-host': this.config.RAPID_API_HOST,
               'Content-Type': 'application/json',
             },
           },

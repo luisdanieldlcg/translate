@@ -27,20 +27,6 @@ create table messages (
 	created_at timestamp with time zone default CURRENT_TIMESTAMP
 );
 
-insert into languages(language_name)
-values('Spanish'),('English');
-
-insert into users(email, password_hash, preferred_language)
-values('admin@email.com', '111111', 2);
-
-insert into chats(owner_id, title)
-values(1, 'New chat room for translating my homework');
-
-insert into messages(chat_id, content, sent_by_user)
-values(1, 'Where are you?', true);
-
-insert into messages(chat_id, content, sent_by_user)
-values(1, 'Dónde estás?', false);
 
 -- select * from languages;
 -- select * from users;

@@ -11,19 +11,13 @@ import {
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './auth.dto';
 import * as constants from '../../common/constants';
-import jwtConfig from 'src/config/jwt.config';
-import { ConfigType } from '@nestjs/config';
 import { Response } from 'express';
 import { AccessGuard, GetUserPrincipal } from './auth.decorators';
 import { UserPrincipal } from './auth.interfaces';
 
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService,
-    @Inject(jwtConfig.KEY)
-    private readonly config: ConfigType<typeof jwtConfig>,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @HttpCode(HttpStatus.OK)
   @Post('login')

@@ -11,8 +11,6 @@ import * as constants from '../../common/constants';
 
 const cookieExtractor = (req: Request) => {
   const cookies = req.cookies;
-
-  console.log('cookies', cookies);
   if (!req || !cookies) {
     return undefined;
   }

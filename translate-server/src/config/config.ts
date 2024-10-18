@@ -13,6 +13,7 @@ export default ConfigModule.forRoot({
     DB_HOST: Joi.string().required(),
     DB_SA_USERNAME: Joi.string().required(),
     DB_SA_PASSWORD: Joi.string().required(),
+    RAPID_API_HOST: Joi.string().required(),
     RAPID_API_KEY: Joi.string().required(),
     JWT_PRIVATE_KEY: Joi.string().required(),
     JWT_LIFETIME: Joi.number().required(),
