@@ -98,3 +98,11 @@ docker compose up
 This command will build and start the containers for the frontend, backend, and database. It may take a few minutes to download the images and build the containers.
 
 Once the containers are up and running, you can access the app by opening your browser and going to `http://localhost:3000`. The first time you access the app, it might the a few seconds for Next.js to finish compiling the frontent. After that, you should see the landing page.
+
+You can access the database by using a database client like [DBeaver](https://dbeaver.io/),
+or [PgAdmin](https://www.pgadmin.org/).
+
+### 4. Signing up:
+
+Now that the app is running, you need to create an account to use the chatbot. You can do that by clicking on the `Sign up` button on the landing page
+and filling in the form.
