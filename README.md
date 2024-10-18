@@ -86,3 +86,15 @@ Now search for the translate endpoint on the left panel, select NodeJS with Axio
 Your API key will be displayed on the right side of the screen within the a header parameter: `'x-rapidapi-key': 'your-api-key'`.
 
 Now set your `RAPID_API_KEY` to the key you just got.
+
+### 3. Running the app:
+
+After you set up the environment variables, you can start the app by running:
+
+```bash
+docker compose up
+```
+
+This command will build and start the containers for the frontend, backend, and database. It may take a few minutes to download the images and build the containers.
+
+Once the containers are up and running, you can access the app by opening your browser and going to `http://localhost:3000`. The first time you access the app, it might the a few seconds for Next.js to finish compiling the frontent. After that, you should see the landing page.
