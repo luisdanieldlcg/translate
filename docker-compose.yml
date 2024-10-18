@@ -24,7 +24,6 @@ services:
       start_period: 10s
     volumes:
       - ./scripts:/docker-entrypoint-initdb.d
-
   # Node.js server
   server:
     build: ./translate-server
