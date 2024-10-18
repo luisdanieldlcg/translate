@@ -35,8 +35,10 @@ const Sidebar = () => {
 
   const router = useRouter();
   // highlight active chat
+  const [filter, setFilter] = useState("");
 
-  const chats = allChats.map((chat, idx) => {
+  const filteredChats = allChats.filter((chat) => chat.title.includes(filter));
+  const chats = filteredChats.map((chat, idx) => {
     const shouldHighlight = activeChat?.chat_id === chat.chat_id;
     return (
       <div
@@ -87,6 +89,7 @@ const Sidebar = () => {
         type="text"
         className="outlined-input text-center !py-2"
         placeholder="Search chats"
+        onChange={(e) => setFilter(e.target.value)}
       />
       <div className="overflow-y-auto flex flex-col gap-y-2">{chats}</div>
 

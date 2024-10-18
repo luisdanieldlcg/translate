@@ -73,6 +73,7 @@ const ChatInput = ({ onSendMessage }: Props) => {
       if (isNewChatScreen) {
         toggleCreatingChat();
         await handleCreateChat(async (chat) => {
+          newChat(chat);
           await handleBotMessage(chat);
           toggleCreatingChat();
           router.push(`/home/chats/${chat.chat_id}`);
