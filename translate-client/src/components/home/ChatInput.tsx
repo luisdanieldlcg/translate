@@ -9,7 +9,6 @@ import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
-  DropdownSection,
   DropdownTrigger,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
@@ -89,7 +88,6 @@ const ChatInput = ({ onSendMessage }: Props) => {
     setError("");
 
     if (!user || !user.userId) {
-      console.log("create:", user);
       setError("Re-authenticate, please.");
       return;
     }
@@ -107,7 +105,7 @@ const ChatInput = ({ onSendMessage }: Props) => {
     await translate(
       {
         chat_id: chat.chat_id,
-        from: "en",
+        from: "", // tells the backend to auto-detect the language
         to: selectedLanguage,
         message: text,
       },

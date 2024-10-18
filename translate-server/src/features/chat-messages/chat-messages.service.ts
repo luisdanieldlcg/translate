@@ -26,7 +26,7 @@ export class ChatMessagesService {
     return this.messageRepository.save(chat);
   }
 
-  async translate(chatId: number, from: string, to: string, message: string) {
+  async translate(chatId: number, to: string, message: string) {
     // 1) save the original message
     await this.create({
       chat_id: chatId,
@@ -35,7 +35,7 @@ export class ChatMessagesService {
     });
     // 2) translate the message
     const translatedText = await this.translationService.translate({
-      from,
+      // from,
       to,
       text: message,
     });

@@ -70,7 +70,6 @@ export const translate = async (
       onFail(response.data.message);
     } else if (response.status === HttpStatusCode.Created) {
       let translation: Translation = response.data;
-      console.log("Calling onSuccess with:", translation);
       onSuccess(translation);
     }
   } catch (error) {
@@ -87,7 +86,6 @@ export const getAllChats = async (
     if (response.data.message) {
       onFail(response.data.message);
     } else if (response.status === HttpStatusCode.Ok) {
-      console.log("Response:", response.data);
       let chats: Chat[] = response.data;
       onSuccess(chats);
     }
@@ -106,7 +104,6 @@ export const getChat = async (
     if (response.data.message) {
       onFail(response.data.message);
     } else if (response.status === HttpStatusCode.Ok) {
-      console.log("Response:", response.data);
       let chat: Chat = response.data;
       onSuccess(chat);
     }
@@ -133,7 +130,6 @@ export const createChat = async (
       chat.messages = [];
       onSuccess(chat);
     }
-    console.log(response.data);
   } catch (error) {
     console.log(error);
   }
@@ -174,7 +170,6 @@ export const signUp = async (
       let user: User = response.data.data;
       onSuccess(user);
     }
-    console.log(response.data);
   } catch (error) {
     console.log(error);
   }
@@ -203,7 +198,6 @@ export const logIn = async (
       let user: User = response.data.data;
       onSuccess(user);
     }
-    console.log(response);
   } catch (error) {
     console.log(error);
   }

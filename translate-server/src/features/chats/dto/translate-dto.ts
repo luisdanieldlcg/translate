@@ -1,8 +1,8 @@
 import { IsNotEmpty } from 'class-validator';
 
 export class TranslateDto {
-  @IsNotEmpty()
-  from: string;
+  // @IsNotEmpty()
+  // from: string;
   @IsNotEmpty()
   to: string;
   @IsNotEmpty()

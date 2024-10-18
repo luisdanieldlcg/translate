@@ -1,11 +1,11 @@
 "use client";
 
-import { Chat, getChat } from "@/api";
+import { getChat } from "@/api";
 import Loading from "@/components/Loading";
 import { useChatStore } from "@/store/chat";
 import { useHomeStore } from "@/store/home";
 import { redirect, useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 const ChatPage = ({ params }: { params: { chatId: string } }) => {
   const param = useParams();
@@ -57,9 +57,11 @@ const ChatPage = ({ params }: { params: { chatId: string } }) => {
         >
           {message.content}
         </div>
-        <div className="flex flex-col items-end">
-          <div className="text-sm text-gray-400 mt-2 italic">{time}</div>
-        </div>
+        {message.sent_by_user && (
+          <div className="flex flex-col items-end">
+            <div className="text-sm text-gray-400 mt-2 italic">{time}</div>
+          </div>
+        )}
       </div>
     );
   });

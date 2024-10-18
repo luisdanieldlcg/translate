@@ -54,7 +54,7 @@ export class ChatsService {
   translate(chat_id: number, dto: TranslateDto) {
     return this.messagesService.translate(
       chat_id,
-      dto.from,
+      // dto.from,
       dto.to,
       dto.message,
     );

@@ -27,9 +27,7 @@ const Sidebar = () => {
         (chats) => {
           setChats(chats);
         },
-        (error) => {
-          console.log(error);
-        }
+        (error) => {}
       );
     };
     loadChats();

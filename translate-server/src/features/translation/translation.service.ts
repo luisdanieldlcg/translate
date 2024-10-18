@@ -5,7 +5,7 @@ import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 
 interface ITranslation {
-  from: string;
+  // from: string;
   to: string;
   text: string;
 }
@@ -31,7 +31,7 @@ export class TranslationService {
         this.httpService.post(
           'https://google-api31.p.rapidapi.com/translate',
           {
-            from_lang: translation.from,
+            from_lang: '', // auto-detect
             to: translation.to,
             text: translation.text,
           },

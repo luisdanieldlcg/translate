@@ -24,7 +24,7 @@ create table messages (
 	chat_id bigint not null references chats(chat_id),
 	content text not null check(content <> ''),
 	sent_by_user bool not null,
-	created_at date default CURRENT_DATE
+	created_at timestamp with time zone default CURRENT_TIMESTAMP
 );
 
 insert into languages(language_name)
