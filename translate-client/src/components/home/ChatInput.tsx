@@ -10,6 +10,7 @@ import { BsSend } from "react-icons/bs";
 const ChatInput = () => {
   const [text, setText] = React.useState("");
   const toggleCreatingChat = useHomeStore((state) => state.toggleCreatingChat);
+  const isNewChatScreen = useHomeStore((state) => state.newChatScreen);
 
   const handleKeyDown = (e: React.KeyboardEvent<any>) => {
     // Check if "Enter" is pressed
@@ -58,25 +59,31 @@ const ChatInput = () => {
       }
     );
   };
-
+  // if we are not on newChatScreen,  put the input on the bottom
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2">
-      <Textarea
-        minRows={1}
-        variant="bordered"
-        placeholder="Translate anything"
-        value={text}
-        classNames={{
-          input: "outlined-input ",
-          inputWrapper: "border-0",
-        }}
-        onChange={(e) => setText(e.target.value)}
-        onKeyDown={handleKeyDown}
-      />
-      <button type="submit">
-        <BsSend className="text-2xl" />
-      </button>
-    </form>
+    <div
+      className={
+        isNewChatScreen ? "" : "bottom-0 fixed min-w-[42rem] my-6 z-50"
+      }
+    >
+      <form onSubmit={handleSubmit} className="flex gap-2">
+        <Textarea
+          minRows={1}
+          variant="bordered"
+          placeholder="Translate anything"
+          value={text}
+          classNames={{
+            input: "outlined-input ",
+            inputWrapper: "border-0",
+          }}
+          onChange={(e) => setText(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+        <button type="submit">
+          <BsSend className="text-2xl" />
+        </button>
+      </form>
+    </div>
   );
 };
 

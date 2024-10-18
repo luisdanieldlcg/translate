@@ -16,22 +16,23 @@ export default function RootLayout({
   const toggleSidebar = useHomeStore((state) => state.toggleSidebar);
   const creatingChat = useHomeStore((state) => state.creatingChat);
   const error = useHomeStore((state) => state.error);
+
   return (
     <>
       <AuthCheck>
-        <div className="flex flex-row h-screen">
+        <div className="flex flex-row">
           <Sidebar />
-          <div className="flex-grow p-4">
-            <nav className="flex items-center justify-between my-4">
-              <FiSidebar
-                className="text-3xl cursor-pointer"
-                onClick={toggleSidebar}
-              />
-              <FiUser className="text-3xl" />
-            </nav>
+          <nav className="my-4 fixed top-0 left-0 right-0 z-10 flex justify-around items-center px-4">
+            <FiSidebar
+              className="text-3xl cursor-pointer"
+              onClick={toggleSidebar}
+            />
+            <FiUser className="text-3xl" />
+          </nav>
+          <div className="flex-grow">
             <div className="max-w-screen-2xl mx-auto text-center flex flex-col h-screen">
-              <div className="m-auto flex flex-col gap-12">
-                {children}
+              <div className="m-auto flex flex-col gap-12 min-w-[50%]">
+                <div className="h-2/5 mt-24 overflow-y-auto">{children}</div>
                 {error && <ErrorMessage message={error} />}
                 {creatingChat ? (
                   <Loading size={64} className="mx-auto" />

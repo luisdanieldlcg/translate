@@ -1,6 +1,7 @@
 "use client";
 
 import { Chat, getChat } from "@/api";
+import { useHomeStore } from "@/store/home";
 import { redirect, useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -10,9 +11,11 @@ const ChatPage = ({ params }: { params: { chatId: string } }) => {
   if (isNaN(chat_id)) {
     redirect("/home");
   }
-
   const [chat, setChat] = useState<Chat | null>(null);
+  const setNewChatScreen = useHomeStore((state) => state.setNewChatScreen);
+
   useEffect(() => {
+    setNewChatScreen(false);
     const loadChat = async (chat_id: number) => {
       // Load chat
       await getChat(
@@ -28,22 +31,22 @@ const ChatPage = ({ params }: { params: { chatId: string } }) => {
     };
     loadChat(chat_id);
   }, []);
-  return (
-    <div>
-      {
-        // title of the chat and number of messages
-      }
-      <h1>Chat: {chat?.title}</h1>
 
-      {
-        // list of messages
-      }
-
-      <div>
-        {chat?.messages.map((message, index) => (
-          <div key={index}>{message.content}</div>
-        ))}
+  const chats = chat?.messages.map((message, idx) => {
+    // if the chat is sent_by_yser, then align to right
+    return (
+      <div key={idx} className="flex justify-end">
+        <div className="bg-[#2E2E2E] py-3 rounded-xl">{message.content}</div>
       </div>
+    );
+  });
+
+  // else align to left
+  return (
+    <div className="">
+      <div>{chats}</div>
+      <div>{chats}</div>
+      <div>{chats}</div>
     </div>
   );
 };

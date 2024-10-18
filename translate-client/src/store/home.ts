@@ -7,6 +7,8 @@ type HomeStore = {
   toggleCreatingChat: () => void;
   error: string;
   setError: (error: string) => void;
+  newChatScreen: boolean;
+  setNewChatScreen: (newChatScreen: boolean) => void;
 };
 
 export const useHomeStore = create<HomeStore>((set) => ({
@@ -21,5 +23,9 @@ export const useHomeStore = create<HomeStore>((set) => ({
   },
   setError: (error) => {
     set(() => ({ error }));
+  },
+  newChatScreen: false,
+  setNewChatScreen: (newChatScreen) => {
+    set(() => ({ newChatScreen }));
   },
 }));
