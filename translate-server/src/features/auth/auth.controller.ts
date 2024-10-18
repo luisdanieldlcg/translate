@@ -16,7 +16,6 @@ import { ConfigType } from '@nestjs/config';
 import { Response } from 'express';
 import { AccessGuard, GetUserPrincipal } from './auth.decorators';
 import { UserPrincipal } from './auth.interfaces';
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
@@ -35,8 +34,7 @@ export class AuthController {
     const credentials = await this.authService.authenticate(dto);
     res.cookie(constants.accessTokenName, credentials.token, {
       httpOnly: true,
-      secure: false,
-      maxAge: 60 * this.config.JWT_LIFETIME,
+      maxAge: 60 * 60 * 24,
     });
     return credentials;
   }
@@ -49,8 +47,7 @@ export class AuthController {
     const credentials = await this.authService.signup(dto);
     res.cookie(constants.accessTokenName, credentials.token, {
       httpOnly: true,
-      secure: false,
-      maxAge: 60 * this.config.JWT_LIFETIME,
+      maxAge: 60 * 60 * 24,
     });
     return credentials;
   }

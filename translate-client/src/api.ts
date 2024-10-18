@@ -29,6 +29,73 @@ export interface Chat {
   messages: Message[];
 }
 
+interface TranslateDto {
+  chat_id: number;
+  from: string;
+  to: string;
+  message: string;
+}
+
+interface Translation {
+  translated_text: string;
+  original_text: string;
+  created_at: string;
+  message_id: string;
+}
+
+export const clearAllChats = async (
+  onSuccess: () => void,
+  onFail: (error: string) => void
+) => {
+  try {
+    const response = await api.delete(`/chats`);
+    if (response.data.message) {
+      onFail(response.data.message);
+    } else if (response.status === HttpStatusCode.Ok) {
+      onSuccess();
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const translate = async (
+  dto: TranslateDto,
+  onSuccess: (translation: Translation) => void,
+  onFail: (error: string) => void
+) => {
+  try {
+    const response = await api.post(`/chats/${dto.chat_id}/translate`, dto);
+    if (!response.data) {
+      onFail(response.data.message);
+    } else if (response.status === HttpStatusCode.Created) {
+      let translation: Translation = response.data;
+      console.log("Calling onSuccess with:", translation);
+      onSuccess(translation);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllChats = async (
+  onSuccess: (chat: Chat[]) => void,
+  onFail: (error: string) => void
+) => {
+  try {
+    const response = await api.get(`/chats`);
+    if (response.data.message) {
+      onFail(response.data.message);
+    } else if (response.status === HttpStatusCode.Ok) {
+      console.log("Response:", response.data);
+      let chats: Chat[] = response.data;
+      onSuccess(chats);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getChat = async (
   chatId: number,
   onSuccess: (chat: Chat) => void,
@@ -63,6 +130,7 @@ export const createChat = async (
       onFail(response.data.message);
     } else if (response.status === HttpStatusCode.Created) {
       let chat: Chat = response.data;
+      chat.messages = [];
       onSuccess(chat);
     }
     console.log(response.data);
@@ -119,10 +187,16 @@ export const logIn = async (
   onFail: (error: string) => void
 ) => {
   try {
-    const response = await api.post("/auth/login", {
-      email,
-      password,
-    });
+    const response = await api.post(
+      "/auth/login",
+      {
+        email,
+        password,
+      },
+      {
+        withCredentials: true,
+      }
+    );
     if (response.data.message) {
       onFail(response.data.message);
     } else if (response.status === HttpStatusCode.Ok) {

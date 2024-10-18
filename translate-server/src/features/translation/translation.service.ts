@@ -10,6 +10,12 @@ interface ITranslation {
   text: string;
 }
 
+interface Translation {
+  detected_language: string;
+  translated: string;
+  original_text: string;
+}
+
 @Injectable()
 export class TranslationService {
   private readonly logger: Logger = new Logger(TranslationService.name);
@@ -19,7 +25,7 @@ export class TranslationService {
     private readonly httpService: HttpService,
   ) {}
 
-  async translate(translation: ITranslation) {
+  async translate(translation: ITranslation): Promise<Translation> {
     try {
       const response = await firstValueFrom(
         this.httpService.post(
@@ -40,8 +46,11 @@ export class TranslationService {
         ),
       );
       this.logger.log(response.data);
+      const data = response.data as Translation[];
+      return data[0];
     } catch (error) {
       this.logger.error(error);
+      return null;
     }
   }
 }

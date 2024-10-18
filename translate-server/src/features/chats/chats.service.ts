@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserService } from '../users/user.service';
 import { ChatMessagesService } from '../chat-messages/chat-messages.service';
+import { TranslateDto } from './dto/translate-dto';
 
 @Injectable()
 export class ChatsService {
@@ -27,13 +28,11 @@ export class ChatsService {
     });
 
     const savedChat = await this.chatRepository.save(chat);
-    // save first message
-    await this.messagesService.create({
-      chat_id: chat.chat_id,
-      content: createChatDto.initialMessage,
-      sent_by_user: true,
-    });
     return savedChat;
+  }
+
+  getAll() {
+    return this.chatRepository.find();
   }
 
   async findOne(id: number) {
@@ -42,21 +41,38 @@ export class ChatsService {
       where: { chat_id: id },
     });
 
+    if (!chat) {
+      return null;
+    }
+
     return {
       ...chat,
       messages,
     };
   }
 
-  findAll() {
-    return `This action returns all chats`;
+  translate(chat_id: number, dto: TranslateDto) {
+    return this.messagesService.translate(
+      chat_id,
+      dto.from,
+      dto.to,
+      dto.message,
+    );
   }
 
-  update(id: number, updateChatDto: UpdateChatDto) {
-    return `This action updates a #${id} chat`;
+  async deleteAll() {
+    await this.messagesService.deleteAllMessages();
+    return this.chatRepository.delete({});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} chat`;
+  async deleteOne(id: number) {
+    // first check if the chat exists
+    const chat = await this.findOne(id);
+    if (!chat) {
+      throw new HttpException('Chat not found', 404);
+    }
+    //first delete the messages of this chat
+    await this.messagesService.deleteMessagesByChat(id);
+    return this.chatRepository.delete({ chat_id: id });
   }
 }

@@ -75,7 +75,8 @@ const SignupPage = () => {
         <input
           type="text"
           id="email"
-          className="outlined-input"
+          placeholder="Enter your email"
+          className="outlined-input !py-3"
           onChange={(e) => setFormData({ ...form, email: e.target.value })}
         />
         <label htmlFor="password" className="font-bold">
@@ -84,7 +85,8 @@ const SignupPage = () => {
         <input
           type="password"
           id="password"
-          className="outlined-input"
+          placeholder="Enter your password"
+          className="outlined-input !py-3"
           onChange={(e) => setFormData({ ...form, password: e.target.value })}
         />
 
@@ -94,7 +96,8 @@ const SignupPage = () => {
         <input
           type="password"
           id="confirm-password"
-          className="outlined-input"
+          placeholder="Confirm your password"
+          className="outlined-input !py-3"
           onChange={(e) =>
             setFormData({ ...form, confirmPassword: e.target.value })
           }

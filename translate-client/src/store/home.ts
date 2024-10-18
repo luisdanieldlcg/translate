@@ -9,12 +9,16 @@ type HomeStore = {
   setError: (error: string) => void;
   newChatScreen: boolean;
   setNewChatScreen: (newChatScreen: boolean) => void;
+  translatingMessage: boolean;
+  toggleTranslatingMessage: () => void;
 };
 
 export const useHomeStore = create<HomeStore>((set) => ({
-  sidebarOpened: false,
+  sidebarOpened: true,
   creatingChat: false,
   error: "",
+  newChatScreen: false,
+  translatingMessage: false,
   toggleSidebar: () => {
     set((state) => ({ sidebarOpened: !state.sidebarOpened }));
   },
@@ -24,8 +28,10 @@ export const useHomeStore = create<HomeStore>((set) => ({
   setError: (error) => {
     set(() => ({ error }));
   },
-  newChatScreen: false,
   setNewChatScreen: (newChatScreen) => {
     set(() => ({ newChatScreen }));
+  },
+  toggleTranslatingMessage: () => {
+    set((state) => ({ translatingMessage: !state.translatingMessage }));
   },
 }));

@@ -65,7 +65,8 @@ const LoginPage = () => {
         <input
           type="text"
           id="email"
-          className="outlined-input"
+          placeholder="Enter your email"
+          className="outlined-input !py-3"
           onChange={(e) => setFormData({ ...form, email: e.target.value })}
         />
 
@@ -75,7 +76,8 @@ const LoginPage = () => {
         <input
           type="password"
           id="password"
-          className="outlined-input"
+          placeholder="Enter your password"
+          className="outlined-input !py-3"
           onChange={(e) => setFormData({ ...form, password: e.target.value })}
         />
         <button className="primary-button my-4" type="submit">
